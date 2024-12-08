@@ -536,7 +536,7 @@
         }
 
         function seleccionarRecarga(cantidad, precio) {
-            const mensaje = encodeURIComponent(`Hola, pagomovil porfavor deseo recargar ${cantidad} de ${precio}Bs`);
+            const mensaje = encodeURIComponent(`Hola, deseo recargar ${cantidad} de ${precio}Bs`);
             const whatsappURL = `https://wa.me/584243734495?text=${mensaje}`;
             window.open(whatsappURL, '_blank');
         }
