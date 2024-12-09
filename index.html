@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tropi - Recargas</title>
     <style>
+        /* Estilos existentes */
         body, html {
             margin: 0;
             padding: 0;
@@ -282,6 +283,21 @@
                 width: 100%;
             }
         }
+        /* Nuevo estilo para el loader */
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #ff6600;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -335,6 +351,7 @@
         </div>
 
         <main id="main-content">
+            <div id="loader" class="loader"></div>
             <section id="inicio">
                 <h2 class="centered">NOVEDADES</h2>
                 <div class="news-item">
@@ -388,7 +405,7 @@
                         <button onclick="seleccionarRecarga('Tarjeta Mensual', 590)">Seleccionar</button>
                     </div>
                     <div class="diamond-option">
-                        <img src="https://ugc.production.linktr.ee/72b457d1-3c87-4b73-ac5c-b46fcc742f8e_PASE-BOOYAH-PNG.png" alt="Pase Booyah!">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDThIBjj4aLTY8dIFPp9tActhRY5mybr3yE-LiyKCnJS5m_jO-jDMLA3nvzob0TI-xN4ZA964jrk6fq_O_318KNbQ1O8-gk3R-cbmfdQim1hY0H0JSZuIH1PoyV0vc-NJ4nj4ufIDgZKQIjTW42prT2ibwzRHoB_eW0vhOlrX7iS0bMh9myXFAznT3NHaH/s1600/Icono-ezgif.com-png-to-webp-conv.jpg" alt="Pase Booyah!">
                         <h3>Pase Booyah!</h3>
                         <p>180Bs</p>
                         <button onclick="seleccionarRecarga('Pase Booyah!', 180)">Seleccionar</button>
@@ -422,29 +439,20 @@
             <section id="perfil" style="display: none;">
                 <h2 class="centered">Perfil de Usuario</h2>
                 <div id="profile-section">
-                    <img src="https://via.placeholder.com/150" alt="Foto de perfil">
+                    <img src="https://via.placeholder.com/150" alt="Foto de perfil" id="profile-section-image">
                     <p><strong>Usuario:</strong> <span id="profile-username"></span></p>
                     <p><strong>Nombre:</strong> <span id="profile-name"></span></p>
                     <p><strong>Apellido:</strong> <span id="profile-lastname"></span></p>
                     <p><strong>Teléfono:</strong> <span id="profile-phone"></span></p>
                     <p><strong>ID de Jugador:</strong> <span id="profile-player-id"></span></p>
                     <p><strong>Correo Electrónico:</strong> <span id="profile-email"></span></p>
+                    <input type="file" id="profile-picture-input" accept="image/*" style="display: none;">
                 </div>
             </section>
 
             <section id="depositar" style="display: none;">
                 <h2 class="centered">Depositar Saldo</h2>
                 <div class="deposit-options">
-                    <div class="deposit-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
-                        <h3>10 Bs</h3>
-                        <button onclick="seleccionarDeposito(10)">Seleccionar</button>
-                    </div>
-                    <div class="deposit-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
-                        <h3>30 Bs</h3>
-                        <button onclick="seleccionarDeposito(30)">Seleccionar</button>
-                    </div>
                     <div class="deposit-option">
                         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
                         <h3>50 Bs</h3>
@@ -464,6 +472,16 @@
                         <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
                         <h3>200 Bs</h3>
                         <button onclick="seleccionarDeposito(200)">Seleccionar</button>
+                    </div>
+                    <div class="deposit-option">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
+                        <h3>250 Bs</h3>
+                        <button onclick="seleccionarDeposito(250)">Seleccionar</button>
+                    </div>
+                    <div class="deposit-option">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
+                        <h3>300 Bs</h3>
+                        <button onclick="seleccionarDeposito(300)">Seleccionar</button>
                     </div>
                 </div>
 
@@ -487,9 +505,9 @@
     <script>
         // User database (replace with your own users)
         const users = [
-            { username: 'Peluca', password: 'Peluca*15', name: 'Jonder', lastname: 'Lugo', phone: '+584123770260', playerId: '7944776573', email: 'jonderlugo15@gmail.com', balance: 50 },
-            { username: 'Nihelsito', password: '123123', name: 'Nihelsen', lastname: 'Barceló', phone: '+584261829019', playerId: '9039825119', email: 'nihlsenbarcelo@gmail.com', balance: 0 },
-            { username: 'Vende_patria18', password: '31478549', name: 'Larry', lastname: 'Caberga', phone: '+584129109908', playerId: '2718527961', email: 'karma20.2005@gmail.com', balance: 0 },
+            { username: 'Peluca', password: 'Peluca*15', name: 'Jonder', lastname: 'Lugo', phone: '+584123770260', playerId: '7944776573', email: 'jonderlugo15@gmail.com', balance: 50, profileImage: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqUSNe67_z0J4C93Q0w0IJ4lU1hLDje9flLMoJwtvM1_bWnO-9AeSgCc1UOrA4To2LO9bgS9-sGrbAMjhnJToEu6sZhwTsSI6ZSq04ZlMyvLNu-LdAxc5feqb3cT1DLl21n_ycGjrF-36mlsBKT16FAOQjC83pKolEf4tjBtiHUEa7RHzvdI3nsc-KNcA3/s16000/468264415_122162933420261555_5691439328432038727_n.jpg' },
+            { username: 'Nihelsito', password: '123123', name: 'Nihelsen', lastname: 'Barceló', phone: '+584261829019', playerId: '9039825119', email: 'nihlsenbarcelo@gmail.com', balance: 0, profileImage: 'https://via.placeholder.com/150' },
+            { username: 'Vende_patria18', password: '31478549', name: 'Larry', lastname: 'Caberga', phone: '+584129109908', playerId: '2718527961', email: 'karma20.2005@gmail.com', balance: 0, profileImage: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgr0Iw4kClAWjA-2IM5J4dvHYYy8IC4Z5nJ0aLV6ozTZiB2Sbdy5q-6TmQ2j4AI8v2gEZP-aQAo9YQL4BbQ9433DNFe_-SKDpzsO3YZtmkqkQ07Mr4zPPIJegqnGjyuBJtvurxh87oxOt5GBAao3rNChnM2C7vCBt8S2qtdpkm0FZEcG25SrTR_7MTVVxlS/s16000/Imagen%20de%20WhatsApp%202024-12-08%20a%20las%2015.48.11_7b8ecefb.jpg' },
         ];
 
         let currentUser = null;
@@ -529,10 +547,20 @@
         }
 
         function showSection(sectionId) {
-            const sections = ['inicio', 'recargar', 'contacto', 'perfil', 'depositar'];
-            sections.forEach(id => {
-                document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
-            });
+            const loader = document.getElementById('loader');
+            loader.style.display = 'block';
+            
+            setTimeout(() => {
+                const sections = ['inicio', 'recargar', 'contacto', 'perfil', 'depositar'];
+                sections.forEach(id => {
+                    document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
+                });
+                loader.style.display = 'none';
+                
+                // Cerrar menús después de seleccionar una opción
+                toggleMenu(true);
+                toggleProfileMenu(true);
+            }, 500);
         }
 
         function seleccionarRecarga(cantidad, precio) {
@@ -549,9 +577,13 @@
             window.location.href = mailtoLink;
         }
 
-        function toggleProfileMenu() {
+        function toggleProfileMenu(forceClose = false) {
             const menu = document.getElementById('profile-menu');
-            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+            if (forceClose) {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+            }
         }
 
         function updateUserInfo() {
@@ -563,6 +595,8 @@
                 document.getElementById('profile-phone').textContent = currentUser.phone;
                 document.getElementById('profile-player-id').textContent = currentUser.playerId;
                 document.getElementById('profile-email').textContent = currentUser.email;
+                document.querySelector('.profile-image').src = currentUser.profileImage;
+                document.getElementById('profile-section-image').src = currentUser.profileImage;
             }
         }
 
@@ -579,9 +613,13 @@
             document.getElementById('login-form').reset();
         }
 
-        function toggleMenu() {
+        function toggleMenu(forceClose = false) {
             const menu = document.getElementById('menu');
-            menu.classList.toggle('show');
+            if (forceClose) {
+                menu.classList.remove('show');
+            } else {
+                menu.classList.toggle('show');
+            }
         }
 
         // Prevent access to content if not logged in
@@ -591,6 +629,19 @@
 
         // Mostrar la sección de inicio por defecto después del login
         showSection('inicio');
+
+        // Agregar funcionalidad para cambiar la imagen de perfil
+        document.getElementById('profile-picture-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentUser.profileImage = e.target.result;
+                    updateUserInfo();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
     <script>
         // Deshabilitar la inspección de la página
