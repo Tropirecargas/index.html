@@ -21,19 +21,19 @@
             background-size: cover;
             background-position: center;
         }
-        #login-form {
+        #login-form, #register-form {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0,0,0,0.2);
             width: 300px;
         }
-        #login-form h2 {
+        #login-form h2, #register-form h2 {
             margin-top: 0;
             color: #ff6600;
             text-align: center;
         }
-        #login-form input {
+        #login-form input, #register-form input {
             width: 100%;
             padding: 10px;
             margin-bottom: 1rem;
@@ -41,7 +41,7 @@
             border-radius: 5px;
             box-sizing: border-box;
         }
-        #login-form button {
+        #login-form button, #register-form button {
             width: 100%;
             padding: 10px;
             background-color: #ff6600;
@@ -51,7 +51,7 @@
             cursor: pointer;
             font-size: 16px;
         }
-        #login-form button:hover {
+        #login-form button:hover, #register-form button:hover {
             background-color: #ff8533;
         }
         #content {
@@ -85,6 +85,7 @@
             cursor: pointer;
             color: #ff6600;
         }
+        /* Estilos existentes */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -125,12 +126,12 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .diamond-options, .deposit-options {
+        .diamond-options, .deposit-options, .game-options {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
         }
-        .diamond-option, .deposit-option {
+        .diamond-option, .deposit-option, .game-option {
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 1rem;
@@ -139,20 +140,13 @@
             width: calc(33.33% - 2rem);
             box-sizing: border-box;
         }
-        .diamond-option img, .deposit-option img {
+        .diamond-option img, .deposit-option img, .game-option img {
             max-width: 100%;
             height: auto;
         }
         .steps {
             margin-top: 2rem;
             margin-bottom: 2rem;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            width: 100%;
         }
         button {
             background-color: #ff6600;
@@ -263,7 +257,7 @@
             nav ul li {
                 margin: 10px 0;
             }
-            .diamond-option, .deposit-option {
+            .diamond-option, .deposit-option, .game-option {
                 width: calc(50% - 2rem);
             }
             h1 {
@@ -279,7 +273,7 @@
             }
         }
         @media (max-width: 480px) {
-            .diamond-option, .deposit-option {
+            .diamond-option, .deposit-option, .game-option {
                 width: 100%;
             }
         }
@@ -298,6 +292,66 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* Nuevos estilos para los juegos */
+        .game-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+        }
+        .game-option {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem;
+            text-align: center;
+            width: calc(33.33% - 2rem);
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .game-option:hover {
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+        .game-option img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+        .game-option h3 {
+            margin: 0;
+        }
+        /* Nuevo estilo para juegos no disponibles */
+        .game-option.not-available {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .game-option.not-available::after {
+            content: 'No disponible';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        /* Nuevos estilos para el formulario de registro */
+        .switch-form {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .switch-form a {
+            color: #ff6600;
+            text-decoration: none;
+        }
+        .switch-form a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -307,6 +361,23 @@
             <input type="text" id="username" placeholder="Usuario" required>
             <input type="password" id="password" placeholder="Contraseña" required>
             <button type="submit">Entrar</button>
+            <div class="switch-form">
+                <a href="#" onclick="showRegisterForm()">¿No tienes cuenta? Regístrate aquí</a>
+            </div>
+        </form>
+
+        <form id="register-form" style="display: none;">
+            <h2>REGISTRO</h2>
+            <input type="text" id="reg-username" placeholder="Usuario" required>
+            <input type="password" id="reg-password" placeholder="Contraseña" required>
+            <input type="text" id="reg-name" placeholder="Nombre" required>
+            <input type="text" id="reg-lastname" placeholder="Apellido" required>
+            <input type="tel" id="reg-phone" placeholder="Teléfono" required>
+            <input type="email" id="reg-email" placeholder="Correo electrónico" required>
+            <button type="submit">Registrar</button>
+            <div class="switch-form">
+                <a href="#" onclick="showLoginForm()">¿Ya tienes cuenta? Inicia sesión aquí</a>
+            </div>
         </form>
     </div>
 
@@ -326,13 +397,22 @@
         </div>
     </div>
 
+    <div id="register-confirmation-modal" class="modal">
+        <div class="modal-content">
+            <h3>Confirmación de registro</h3>
+            <p>Su perfil será procesado vía WhatsApp. ¿Desea continuar?</p>
+            <button onclick="sendRegistrationToWhatsApp()">Sí, enviar</button>
+            <button onclick="closeModal('register-confirmation-modal')">Cancelar</button>
+        </div>
+    </div>
+
     <div id="content">
         <header>
             <div class="profile-section">
                 <img src="https://via.placeholder.com/50" alt="Perfil" class="profile-image" onclick="toggleProfileMenu()">
                 <span class="balance">Saldo: <span id="user-balance">0</span> Bs</span>
             </div>
-            <h1>TROPI RECARGAS</h1>
+            <h1>TROPI - CDR</h1>
             <nav>
                 <div class="menu-toggle" onclick="toggleMenu()">☰</div>
                 <ul id="menu">
@@ -367,59 +447,152 @@
                 <div class="news-item">
                     <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizmj2LgCqrALa2WQxv-mH8qc1m6rVNK-OvbEslDpNrQWBfoEPctSAzDJT4JPMo2mhaMevbKvngJZemvSS3kQRWV0WZt4STJ2X21wYarzW73xipJYbkr70GJvjYf7_-ebCcpso19UjDg-au3dgJCFdb8Bg6-KYpHo33-fYsS8Ot23MKg30BxVe2B4966LH9/s16000/mantenimiento-web.jpg" alt="Evento de doble experiencia">
                     <h3>Mantenimiento Programado</h3>
-                    <p>El servidor estará en mantenimiento el próximo lunes de 6am a 3pm</p>
+                    <p>El servidor estará en mantenimiento el próximo martes de 6am a 3pm</p>
                 </div>
             </section>
 
             <section id="recargar" style="display: none;">
-                <h2 class="centered">Recarga tus Diamantes</h2>
-                <div class="diamond-options">
-                    <div class="diamond-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0EdQaiAqAM9_mG-CUJIydWOyVl62PjPUSxbcndfGf5n21I3Xo9Sivm8-C_zx6bCQh2lOmsjVZB08kMXLhosZWk_RoyHbEG7o4z499EUxP4h6ByP25BZTDQr5D4u6RMv5gnijFzutOgoFZuROTiqwuwplL3Oa967S62PzXrlXbjMIa7RMxvxj3nnIIjF2T/s16000/yVS1saI.png" alt="110 Diamantes">
-                        <h3>110 Diamantes</h3>
-                        <p>70Bs</p>
-                        <button onclick="seleccionarRecarga('110 Diamantes', 70)">Seleccionar</button>
+                <h2 class="centered">Selecciona el juego para recargar</h2>
+                <div class="game-options">
+                    <div class="game-option" onclick="showGameOptions('free-fire')">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEggUsHge6Bxo56JMLz9yX0kPIiUH-UqnOMcyrKuiHs8iufv12NoO-uvygZoK6nKeT0J9QZVi1WwHchoImpb-ydOdKLX1B7aW__2Hx2Cx1A0IdV2DlMSNo7Jz1MDYZjGHGI8peA52zKDm4l5bErL74m48okrowgiNGGvUpeaGzLwxX4RJ59iIHx2yn_D6SMx/s16000/360.jpg" alt="Free Fire">
+                        <h3>Free Fire</h3>
                     </div>
-                    <div class="diamond-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0EdQaiAqAM9_mG-CUJIydWOyVl62PjPUSxbcndfGf5n21I3Xo9Sivm8-C_zx6bCQh2lOmsjVZB08kMXLhosZWk_RoyHbEG7o4z499EUxP4h6ByP25BZTDQr5D4u6RMv5gnijFzutOgoFZuROTiqwuwplL3Oa967S62PzXrlXbjMIa7RMxvxj3nnIIjF2T/s16000/yVS1saI.png" alt="341 Diamantes">
-                        <h3>341 Diamantes</h3>
-                        <p>210Bs</p>
-                        <button onclick="seleccionarRecarga('341 Diamantes', 210)">Seleccionar</button>
+                    <div class="game-option" onclick="showGameOptions('blood-strike')">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRxoBg0ko3KA9-hDzNjk520mgOrltHI7HPXc5LBk4VC25fY_llVcHlmMdGQ2o7TnUuAm9LgaEqVtVZWPU8mVDqVbMtPg8dsTCnfg0xCy1io28SdjfVsYtdsNkHYifKcS7G5hhUmssZYdhdnlLA70nGwPUtU8ybHNRIBLZ61WkuZ2sWpoBlDeRkQmFklyvR/s16000/blood-strike.jpg" alt="Blood Strike">
+                        <h3>Blood Strike</h3>
                     </div>
-                    <div class="diamond-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0EdQaiAqAM9_mG-CUJIydWOyVl62PjPUSxbcndfGf5n21I3Xo9Sivm8-C_zx6bCQh2lOmsjVZB08kMXLhosZWk_RoyHbEG7o4z499EUxP4h6ByP25BZTDQr5D4u6RMv5gnijFzutOgoFZuROTiqwuwplL3Oa967S62PzXrlXbjMIa7RMxvxj3nnIIjF2T/s16000/yVS1saI.png" alt="572 Diamantes">
-                        <h3>572 Diamantes</h3>
-                        <p>360Bs</p>
-                        <button onclick="seleccionarRecarga('572 Diamantes', 360)">Seleccionar</button>
+                    <div class="game-option not-available">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh3mSXVyUdKeG5aKQsyXi5OKfIAIrTAvnEMiSuzh1Gx5VhSgwGvb0jDDtk1zbM-KJFkzDNlLjQwvQV7U897RlWifVMWF0u3mGF7DNt02z2LpVwJLMbL9WD_74c4_AXscoyn7NHUzJeYutkrPKQ-QPFCqyTI0c5Pa8QDnBH5_TLmvYONab_mDHJn-_agaDL-/s16000/mobile-legends-bang-bang_c6z8.jpg" alt="Mobile Legends">
+                        <h3>Mobile Legends</h3>
                     </div>
-                    <div class="diamond-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMmYk4W7Tmq8ANDzjwG5DrECrkpBsUV3SiKwex4NarLU4KrHAGLiHQ0dbUilN0wxPqGwI9kkPYhIWU_gIWIYJ54azKV8tv7d9jah0v1UlVLW6EKk9Ke_X_WI1Lc6vj53QWUgeBHMttpTMSej7hRaoxUHcQDOJQGvcZ6KKOmWmdTOA3bFfh5SrDmUIlRUCU/s1600/Tarjeta-semanal.jpg" alt="Tarjeta Semanal">
-                        <h3>Tarjeta Semanal</h3>
-                        <p>140Bs</p>
-                        <button onclick="seleccionarRecarga('Tarjeta Semanal', 140)">Seleccionar</button>
+                    <div class="game-option not-available">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFxUQLK2lhvPtAWnEB0Q1KM2kzN92ERkGKGW71CI0E_hKmp9ASrEfGCUSfCapdg9UGqZ1yv7kYzJt5HQFLa0jRR_gnm1lK3NldLsu74AD_iChYskjBCLqvLgqCIspOv03H25GgNBxmsdX279IehHulKtnVfJNtfQvZiBZkHbXzPISBD5fm-f3AigUw6TGm/s16000/unnamed.jpg" alt="Call of Duty">
+                        <h3>Call of Duty</h3>
                     </div>
-                    <div class="diamond-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjshX2vujxOnfJXNxw7HsRP9s7g0BJJDRS9Ti9b8OVUu1eCqaqVs3goIOr_T6S3JZDFpbFnMIA50e9gr2yGdyBaq9iw2J6IrdMuVRzhqvlClu82kg7RwU9QMqnLHkhjyY0jlIgQ_zkRFg8tWJ_NP7N5Q9q3CNDIKkPjWrsVTHmMCTG4Sfe-5rNDl6JTewes/s1600/Tarjeta-mensual.jpg" alt="Tarjeta Mensual">
-                        <h3>Tarjeta Mensual</h3>
-                        <p>590Bs</p>
-                        <button onclick="seleccionarRecarga('Tarjeta Mensual', 590)">Seleccionar</button>
+                    <div class="game-option" onclick="showGameOptions('pubg-mobile')">
+                        <img src="https://play-lh.googleusercontent.com/JRd05pyBH41qjgsJuWduRJpDeZG0Hnb0yjf2nWqO7VaGKL10-G5UIygxED-WNOc3pg" alt="PUBG Mobile">
+                        <h3>PUBG Mobile</h3>
                     </div>
-                    <div class="diamond-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDThIBjj4aLTY8dIFPp9tActhRY5mybr3yE-LiyKCnJS5m_jO-jDMLA3nvzob0TI-xN4ZA964jrk6fq_O_318KNbQ1O8-gk3R-cbmfdQim1hY0H0JSZuIH1PoyV0vc-NJ4nj4ufIDgZKQIjTW42prT2ibwzRHoB_eW0vhOlrX7iS0bMh9myXFAznT3NHaH/s1600/Icono-ezgif.com-png-to-webp-conv.jpg" alt="Pase Booyah!">
-                        <h3>Pase Booyah!</h3>
-                        <p>180Bs</p>
-                        <button onclick="seleccionarRecarga('Pase Booyah!', 180)">Seleccionar</button>
+                    <div class="game-option not-available">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEho3d_AManXNTcfv_tON_NFFsnMEcuW1i21LwghpyTyaOyl4C628xrydxkPP0m0DU34rlGHvbeXK0SWeMbspmt_9QQKqWwfuvR_4UG7A-SXxjs7zvP-llYwzOgthyphenhyphen224dzcqS2-2O0qdBU2DEkfLBVHd-2Y8z5LvwqhxiYOOjL6jz1VmLigxgA9z15iGnKS/s16000/latest.jpg" alt="Stumble Guys">
+                        <h3>Stumble Guys</h3>
                     </div>
+                </div>
+
+                <div id="free-fire-options" style="display: none;">
+                    <h2 class="centered">Recarga tus Diamantes en Free Fire</h2>
+                    <div class="diamond-options">
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0EdQaiAqAM9_mG-CUJIydWOyVl62PjPUSxbcndfGf5n21I3Xo9Sivm8-C_zx6bCQh2lOmsjVZB08kMXLhosZWk_RoyHbEG7o4z499EUxP4h6ByP25BZTDQr5D4u6RMv5gnijFzutOgoFZuROTiqwuwplL3Oa967S62PzXrlXbjMIa7RMxvxj3nnIIjF2T/s16000/yVS1saI.png" alt="110 Diamantes">
+                            <h3>110 Diamantes</h3>
+                            <p>70Bs</p>
+                            <button onclick="seleccionarRecarga('Free Fire', '110 Diamantes', 70)">Seleccionar</button>
+                        </div>
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0EdQaiAqAM9_mG-CUJIydWOyVl62PjPUSxbcndfGf5n21I3Xo9Sivm8-C_zx6bCQh2lOmsjVZB08kMXLhosZWk_RoyHbEG7o4z499EUxP4h6ByP25BZTDQr5D4u6RMv5gnijFzutOgoFZuROTiqwuwplL3Oa967S62PzXrlXbjMIa7RMxvxj3nnIIjF2T/s16000/yVS1saI.png" alt="341 Diamantes">
+                            <h3>341 Diamantes</h3>
+                            <p>210Bs</p>
+                            <button onclick="seleccionarRecarga('Free Fire', '341 Diamantes', 210)">Seleccionar</button>
+                        </div>
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0EdQaiAqAM9_mG-CUJIydWOyVl62PjPUSxbcndfGf5n21I3Xo9Sivm8-C_zx6bCQh2lOmsjVZB08kMXLhosZWk_RoyHbEG7o4z499EUxP4h6ByP25BZTDQr5D4u6RMv5gnijFzutOgoFZuROTiqwuwplL3Oa967S62PzXrlXbjMIa7RMxvxj3nnIIjF2T/s16000/yVS1saI.png" alt="572 Diamantes">
+                            <h3>572 Diamantes</h3>
+                            <p>360Bs</p>
+                            <button onclick="seleccionarRecarga('Free Fire', '572 Diamantes', 360)">Seleccionar</button>
+                        </div>
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMmYk4W7Tmq8ANDzjwG5DrECrkpBsUV3SiKwex4NarLU4KrHAGLiHQ0dbUilN0wxPqGwI9kkPYhIWU_gIWIYJ54azKV8tv7d9jah0v1UlVLW6EKk9Ke_X_WI1Lc6vj53QWUgeBHMttpTMSej7hRaoxUHcQDOJQGvcZ6KKOmWmdTOA3bFfh5SrDmUIlRUCU/s1600/Tarjeta-semanal.jpg" alt="Tarjeta Semanal">
+                            <h3>Tarjeta Semanal</h3>
+                            <p>140Bs</p>
+                            <button onclick="seleccionarRecarga('Free Fire', 'Tarjeta Semanal', 140)">Seleccionar</button>
+                        </div>
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjshX2vujxOnfJXNxw7HsRP9s7g0BJJDRS9Ti9b8OVUu1eCqaqVs3goIOr_T6S3JZDFpbFnMIA50e9gr2yGdyBaq9iw2J6IrdMuVRzhqvlClu82kg7RwU9QMqnLHkhjyY0jlIgQ_zkRFg8tWJ_NP7N5Q9q3CNDIKkPjWrsVTHmMCTG4Sfe-5rNDl6JTewes/s1600/Tarjeta-mensual.jpg" alt="Tarjeta Mensual">
+                            <h3>Tarjeta Mensual</h3>
+                            <p>590Bs</p>
+                            <button onclick="seleccionarRecarga('Free Fire', 'Tarjeta Mensual', 590)">Seleccionar</button>
+                        </div>
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDThIBjj4aLTY8dIFPp9tActhRY5mybr3yE-LiyKCnJS5m_jO-jDMLA3nvzob0TI-xN4ZA964jrk6fq_O_318KNbQ1O8-gk3R-cbmfdQim1hY0H0JSZuIH1PoyV0vc-NJ4nj4ufIDgZKQIjTW42prT2ibwzRHoB_eW0vhOlrX7iS0bMh9myXFAznT3NHaH/s1600/Icono-ezgif.com-png-to-webp-conv.jpg" alt="Pase Booyah!">
+                            <h3>Pase Booyah!</h3>
+                            <p>180Bs</p>
+                            <button onclick="seleccionarRecarga('Free Fire', 'Pase Booyah!', 180)">Seleccionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="blood-strike-options" style="display: none;">
+                    <h2 class="centered">Recarga en Blood Strike</h2>
+                    <div class="diamond-options">
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhs_whoBhPxjWIcmmOCRcuAHse8i12q7r2Hgyq4v1J150ZYcWu-Ot0TX0Rxio8JbeL59SI0WBvFWtZ4kXS9jAluAMc4Y4E1lwLVn6vIcnCYmNbBscEcezwAutPdvN5tYJwZ0g4JheKm9jcFDz514yHv5OI-TuIcKJslA11mC5rajoRost6TOo6Hi1Q0g2k1/s16000/oss-4aa616b4932638332eb91b4bd108.jpg" alt="">
+                            <h3>100 Monedas</h3>
+                            <p>50Bs</p>
+                            <button onclick="seleccionarRecarga('Blood Strike', '100 Monedas', 50)">Seleccionar</button>
+                        </div>
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhs_whoBhPxjWIcmmOCRcuAHse8i12q7r2Hgyq4v1J150ZYcWu-Ot0TX0Rxio8JbeL59SI0WBvFWtZ4kXS9jAluAMc4Y4E1lwLVn6vIcnCYmNbBscEcezwAutPdvN5tYJwZ0g4JheKm9jcFDz514yHv5OI-TuIcKJslA11mC5rajoRost6TOo6Hi1Q0g2k1/s16000/oss-4aa616b4932638332eb91b4bd108.jpg" alt="">
+                            <h3>300 Monedas</h3>
+                            <p>140Bs</p>
+                            <button onclick="seleccionarRecarga('Blood Strike', '300 Monedas', 140)">Seleccionar</button>
+                        </div>
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhs_whoBhPxjWIcmmOCRcuAHse8i12q7r2Hgyq4v1J150ZYcWu-Ot0TX0Rxio8JbeL59SI0WBvFWtZ4kXS9jAluAMc4Y4E1lwLVn6vIcnCYmNbBscEcezwAutPdvN5tYJwZ0g4JheKm9jcFDz514yHv5OI-TuIcKJslA11mC5rajoRost6TOo6Hi1Q0g2k1/s16000/oss-4aa616b4932638332eb91b4bd108.jpg" alt="">
+                            <h3>500 Monedas</h3>
+                            <p>220Bs</p>
+                            <button onclick="seleccionarRecarga('Blood Strike', '500 Monedas', 220)">Seleccionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mobile-legends-options" style="display: none;">
+                    <h2 class="centered">Recarga en Mobile Legends</h2>
+                    <p style="text-align: center; color: red;">Lo sentimos, las recargas para Mobile Legends no están disponibles en este momento.</p>
+                </div>
+
+                <div id="call-of-duty-options" style="display: none;">
+                    <h2 class="centered">Recarga en Call of Duty Mobile</h2>
+                    <p style="text-align: center; color: red;">Lo sentimos, las recargas para Call of Duty Mobile no están disponibles en este momento.</p>
+                </div>
+
+                <div id="pubg-mobile-options" style="display: none;">
+                    <h2 class="centered">Recarga en PUBG Mobile</h2>
+                    <div class="diamond-options">
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLzyMh1Ii6jYfHRTfUhuCrZsuHsJLmfVkA7rPJb85fwVMZPkvQNn3P227oEc6R_XvMZHggD__BAOERGOkhjqW_cXFEmww-6BRDyfYgQ5w6YB0lHfFr9zyio0H9JdIUOzeKgOWLcKaPlbsjT3KuOTfPHoNkgsfOLonDjIQCSxC-Kw-WINMt4rOFrTagTcBF/s16000/IMG_3394-Photoroom-2.jpg" alt="">
+                            <h3>60 UC</h3>
+                            <p>45Bs</p>
+                            <button onclick="seleccionarRecarga('PUBG Mobile', '60 UC', 45)">Seleccionar</button>
+                        </div>
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLzyMh1Ii6jYfHRTfUhuCrZsuHsJLmfVkA7rPJb85fwVMZPkvQNn3P227oEc6R_XvMZHggD__BAOERGOkhjqW_cXFEmww-6BRDyfYgQ5w6YB0lHfFr9zyio0H9JdIUOzeKgOWLcKaPlbsjT3KuOTfPHoNkgsfOLonDjIQCSxC-Kw-WINMt4rOFrTagTcBF/s16000/IMG_3394-Photoroom-2.jpg" alt="">
+                            <h3>300 UC</h3>
+                            <p>210Bs</p>
+                            <button onclick="seleccionarRecarga('PUBG Mobile', '300 UC', 210)">Seleccionar</button>
+                        </div>
+                        <div class="diamond-option">
+                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLzyMh1Ii6jYfHRTfUhuCrZsuHsJLmfVkA7rPJb85fwVMZPkvQNn3P227oEc6R_XvMZHggD__BAOERGOkhjqW_cXFEmww-6BRDyfYgQ5w6YB0lHfFr9zyio0H9JdIUOzeKgOWLcKaPlbsjT3KuOTfPHoNkgsfOLonDjIQCSxC-Kw-WINMt4rOFrTagTcBF/s16000/IMG_3394-Photoroom-2.jpg" alt="">
+                            <h3>600 UC</h3>
+                            <p>400Bs</p>
+                            <button onclick="seleccionarRecarga('PUBG Mobile', '600 UC', 400)">Seleccionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="stumble-guys-options" style="display: none;">
+                    <h2 class="centered">Recarga en Stumble Guys</h2>
+                    <p style="text-align: center; color: red;">Lo sentimos, las recargas para Stumble Guys no están disponibles en este momento.</p>
                 </div>
 
                 <section class="steps">
                     <h2>Cómo recargar</h2>
                     <ol>
-                        <li>Selecciona la cantidad de diamantes que deseas recargar</li>
-                        <li>Envia el mensaje automatico de whatsapp</li>
-                        <li>Envias tu ID de Free Fire</li>
-                        <li>Se descontara su saldo depositado</li>
-                        <li>¡Recibe tus diamantes de 10min - 60min!</li>
+                        <li>Selecciona el juego que deseas recargar</li>
+                        <li>Elige la cantidad de moneda virtual que quieres comprar</li>
+                        <li>Haz clic en "Seleccionar" para la opción deseada</li>
+                        <li>Sigue las instrucciones para completar el pago</li>
+                        <li>¡Recibe tu recarga en el juego en 10-60 minutos!</li>
                     </ol>
                 </section>
             </section>
@@ -430,7 +603,7 @@
                     <input type="text" name="nombre" placeholder="Nombre" required>
                     <input type="text" name="apellido" placeholder="Apellido" required>
                     <input type="email" name="email" placeholder="Correo electrónico" required>
-                    <input type="text" name="id" placeholder="ID de Free Fire" required>
+                    <input type="text" name="id" placeholder="ID de Juego" required>
                     <textarea name="mensaje" placeholder="Asunto del mensaje" required></textarea>
                     <button type="submit">Enviar</button>
                 </form>
@@ -444,9 +617,7 @@
                     <p><strong>Nombre:</strong> <span id="profile-name"></span></p>
                     <p><strong>Apellido:</strong> <span id="profile-lastname"></span></p>
                     <p><strong>Teléfono:</strong> <span id="profile-phone"></span></p>
-                    <p><strong>ID de Jugador:</strong> <span id="profile-player-id"></span></p>
                     <p><strong>Correo Electrónico:</strong> <span id="profile-email"></span></p>
-                    <input type="file" id="profile-picture-input" accept="image/*" style="display: none;">
                 </div>
             </section>
 
@@ -495,20 +666,17 @@
                         <li>¡Recibe tu deposito de 10min - 30min!</li>
                     </ol>
                 </section>
-
             </section>
         </main>
-
-        
     </div>
 
     <script>
         // User database (replace with your own users)
         const users = [
-            { username: 'Peluca', password: 'Peluca*15', name: 'Jonder', lastname: 'Lugo', phone: '+584123770260', playerId: '7944776573', email: 'jonderlugo15@gmail.com', balance: 50, profileImage: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqUSNe67_z0J4C93Q0w0IJ4lU1hLDje9flLMoJwtvM1_bWnO-9AeSgCc1UOrA4To2LO9bgS9-sGrbAMjhnJToEu6sZhwTsSI6ZSq04ZlMyvLNu-LdAxc5feqb3cT1DLl21n_ycGjrF-36mlsBKT16FAOQjC83pKolEf4tjBtiHUEa7RHzvdI3nsc-KNcA3/s16000/468264415_122162933420261555_5691439328432038727_n.jpg' },
-            { username: 'Nihelsito', password: '123123', name: 'Nihelsen', lastname: 'Barceló', phone: '+584261829019', playerId: '9039825119', email: 'nihlsenbarcelo@gmail.com', balance: 0, profileImage: 'https://via.placeholder.com/150' },
-            { username: 'Vende_patria18', password: '31478549', name: 'Larry', lastname: 'Caberga', phone: '+584129109908', playerId: '2718527961', email: 'karma20.2005@gmail.com', balance: 0, profileImage: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgr0Iw4kClAWjA-2IM5J4dvHYYy8IC4Z5nJ0aLV6ozTZiB2Sbdy5q-6TmQ2j4AI8v2gEZP-aQAo9YQL4BbQ9433DNFe_-SKDpzsO3YZtmkqkQ07Mr4zPPIJegqnGjyuBJtvurxh87oxOt5GBAao3rNChnM2C7vCBt8S2qtdpkm0FZEcG25SrTR_7MTVVxlS/s16000/Imagen%20de%20WhatsApp%202024-12-08%20a%20las%2015.48.11_7b8ecefb.jpg' },
-            { username: 'Cachetes', password: '34409059', name: 'Stevenson', lastname: 'Correa', phone: '+584267213285', playerId: '7851431826', email: 'correastevenson275@gmail.com', balance: 0, profileImage: '#' },
+            { username: 'Peluca', password: 'Peluca*15', name: 'Jonder', lastname: 'Lugo', phone: '+584123770260', email: 'jonderlugo15@gmail.com', balance: 50, profileImage: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqUSNe67_z0J4C93Q0w0IJ4lU1hLDje9flLMoJwtvM1_bWnO-9AeSgCc1UOrA4To2LO9bgS9-sGrbAMjhnJToEu6sZhwTsSI6ZSq04ZlMyvLNu-LdAxc5feqb3cT1DLl21n_ycGjrF-36mlsBKT16FAOQjC83pKolEf4tjBtiHUEa7RHzvdI3nsc-KNcA3/s16000/468264415_122162933420261555_5691439328432038727_n.jpg' },
+            { username: 'Nihelsito', password: '123123', name: 'Nihelsen', lastname: 'Barceló', phone: '+584261829019', email: 'nihlsenbarcelo@gmail.com', balance: 0, profileImage: 'https://via.placeholder.com/150' },
+            { username: 'Vende_patria18', password: '31478549', name: 'Larry', lastname: 'Caberga', phone: '+584129109908', email: 'karma20.2005@gmail.com', balance: 0, profileImage: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgr0Iw4kClAWjA-2IM5J4dvHYYy8IC4Z5nJ0aLV6ozTZiB2Sbdy5q-6TmQ2j4AI8v2gEZP-aQAo9YQL4BbQ9433DNFe_-SKDpzsO3YZtmkqkQ07Mr4zPPIJegqnGjyuBJtvurxh87oxOt5GBAao3rNChnM2C7vCBt8S2qtdpkm0FZEcG25SrTR_7MTVVxlS/s16000/Imagen%20de%20WhatsApp%202024-12-08%20a%20las%2015.48.11_7b8ecefb.jpg' },
+            { username: 'Cachetes', password: '34409059', name: 'Stevenson', lastname: 'Correa', phone: '+584267213285', email: 'correastevenson275@gmail.com', balance: 0, profileImage: '#' },
         ];
 
         let currentUser = null;
@@ -564,8 +732,17 @@
             }, 500);
         }
 
-        function seleccionarRecarga(cantidad, precio) {
-            const mensaje = encodeURIComponent(`Hola, deseo recargar ${cantidad} de ${precio}Bs`);
+        function showGameOptions(gameId) {
+            const gameOptions = ['free-fire-options', 'blood-strike-options', 'mobile-legends-options', 'call-of-duty-options', 'pubg-mobile-options', 'stumble-guys-options'];
+            gameOptions.forEach(option => {
+                document.getElementById(option).style.display = 'none';
+            });
+            document.getElementById(`${gameId}-options`).style.display = 'block';
+            showSection('recargar');
+        }
+
+        function seleccionarRecarga(juego, cantidad, precio) {
+            const mensaje = encodeURIComponent(`Hola, deseo recargar ${cantidad} en ${juego} por ${precio}Bs`);
             const whatsappURL = `https://wa.me/584243734495?text=${mensaje}`;
             window.open(whatsappURL, '_blank');
         }
@@ -574,7 +751,7 @@
             event.preventDefault();
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData);
-            const mailtoLink = `mailto:Tropisoporte2024@gmail.com?subject=Contacto de ${data.nombre} ${data.apellido}&body=Nombre: ${data.nombre} ${data.apellido}%0D%0AEmail: ${data.email}%0D%0AID de Free Fire: ${data.id}%0D%0AMensaje: ${data.mensaje}`;
+            const mailtoLink = `mailto:Tropisoporte2024@gmail.com?subject=Contacto de ${data.nombre} ${data.apellido}&body=Nombre: ${data.nombre} ${data.apellido}%0D%0AEmail: ${data.email}%0D%0AID de Juego: ${data.id}%0D%0AMensaje: ${data.mensaje}`;
             window.location.href = mailtoLink;
         }
 
@@ -594,7 +771,6 @@
                 document.getElementById('profile-name').textContent = currentUser.name;
                 document.getElementById('profile-lastname').textContent = currentUser.lastname;
                 document.getElementById('profile-phone').textContent = currentUser.phone;
-                document.getElementById('profile-player-id').textContent = currentUser.playerId;
                 document.getElementById('profile-email').textContent = currentUser.email;
                 document.querySelector('.profile-image').src = currentUser.profileImage;
                 document.getElementById('profile-section-image').src = currentUser.profileImage;
@@ -631,18 +807,44 @@
         // Mostrar la sección de inicio por defecto después del login
         showSection('inicio');
 
-        // Agregar funcionalidad para cambiar la imagen de perfil
-        document.getElementById('profile-picture-input').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    currentUser.profileImage = e.target.result;
-                    updateUserInfo();
-                };
-                reader.readAsDataURL(file);
-            }
+        function showRegisterForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+
+        function showLoginForm() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('register-form').style.display = 'none';
+        }
+
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('register-confirmation-modal').style.display = 'block';
         });
+
+        function sendRegistrationToWhatsApp() {
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+            const name = document.getElementById('reg-name').value;
+            const lastname = document.getElementById('reg-lastname').value;
+            const phone = document.getElementById('reg-phone').value;
+            const email = document.getElementById('reg-email').value;
+
+            const message = `Nuevo registro:
+Usuario: ${username}
+Contraseña: ${password}
+Nombre: ${name}
+Apellido: ${lastname}
+Teléfono: ${phone}
+Email: ${email}`;
+
+            const whatsappURL = `https://wa.me/584243734495?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappURL, '_blank');
+
+            closeModal('register-confirmation-modal');
+            showLoginForm();
+        }
     </script>
     <script>
         // Deshabilitar la inspección de la página
