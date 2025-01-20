@@ -3,61 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tropi - Recargas</title>
+    <title>Recargas para Juegos</title>
     <style>
-        /* Estilos existentes */
-        body, html {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            height: 100%;
-            font-family: Arial, sans-serif;
-        }
-        #login-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-image: url('https://img.freepik.com/vector-premium/fondo-futurista-gradiente-color-naranja_32582-1658.jpg?semt=ais_hybrid');
+            background-image: url('https://media.istockphoto.com/id/1363717602/es/foto/abstracto-rojo-y-negro-son-patrones-de-luz-con-el-degradado-es-el-con-la-pared-de-suelo.jpg?b=1&s=612x612&w=0&k=20&c=TbEUfs7_a_KRB5S4kWnStq-C6c-s_llLkRpicDQJ3Sg=');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
         }
-        #login-form, #register-form {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 2rem;
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
-            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        #login-form h2, #register-form h2 {
-            margin-top: 0;
-            color: #ff6600;
+        h1, h2 {
             text-align: center;
+            color: #333;
         }
-        #login-form input, #register-form input {
-            width: 100%;
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            margin: 10px 0;
             padding: 10px;
-            margin-bottom: 1rem;
             border: 1px solid #ddd;
             border-radius: 5px;
-            box-sizing: border-box;
         }
-        #login-form button, #register-form button {
-            width: 100%;
+        button {
+            margin-top: 10px;
             padding: 10px;
-            background-color: #ff6600;
+            background-color: #ff0000;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
         }
-        #login-form button:hover, #register-form button:hover {
-            background-color: #ff8533;
+        button:hover {
+            background-color: #e61616;
         }
-        #content {
+        .error {
+            color: red;
+            text-align: center;
+        }
+        .switch {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .switch a {
+            color: #ff0000;
+            text-decoration: none;
+        }
+        .top-menu {
+            background-color: #e61616;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu-sections {
+            display: flex;
+            gap: 20px;
+        }
+        .menu-section {
+            cursor: pointer;
+            position: relative;
+        }
+        .menu-section:hover::after {
+            content: "En mantenimiento";
+            position: absolute;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 12px;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+        .menu-counters {
+            display: flex;
+            gap: 20px;
+        }
+        .counter {
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: black;
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .profile-menu {
             display: none;
+            position: absolute;
+            right: 20px;
+            top: 60px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
-        .modal {
+        .profile-menu.active {
+            display: block;
+        }
+        .profile-menu a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+        }
+        .profile-menu a:hover {
+            background-color: #f0f0f0;
+        }
+        .games-container, .rewards-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .game-card, .reward-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .game-card:hover, .reward-card:hover {
+            transform: translateY(-5px);
+        }
+        .game-card img, .reward-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .game-card h3, .reward-card h3 {
+            margin: 0;
+            color: #333;
+        }
+        .game-card p, .reward-card p {
+            color: #666;
+        }
+        .game-card.unavailable {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .game-card.unavailable::after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .recharge-modal, .deposit-modal, .profile-modal {
             display: none;
             position: fixed;
             z-index: 1;
@@ -65,6 +184,7 @@
             top: 0;
             width: 100%;
             height: 100%;
+            overflow: auto;
             background-color: rgba(0,0,0,0.4);
         }
         .modal-content {
@@ -72,801 +192,538 @@
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 300px;
-            text-align: center;
+            width: 80%;
+            max-width: 500px;
             border-radius: 10px;
-            position: relative;
         }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
             cursor: pointer;
-            color: #ff6600;
         }
-        /* Estilos existentes */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .recharge-form, .deposit-form {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            gap: 10px;
         }
-        header {
-            background-color: #ff6600;
-            color: white;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .recharge-form img, .deposit-form img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto;
         }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 10px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-        main {
-            flex: 1;
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .diamond-options, .deposit-options, .game-options {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-        .diamond-option, .deposit-option, .game-option {
+        .recharge-form select, .recharge-form input, .deposit-form input, .deposit-form select {
+            padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            padding: 1rem;
-            margin: 1rem;
-            text-align: center;
-            width: calc(33.33% - 2rem);
-            box-sizing: border-box;
         }
-        .diamond-option img, .deposit-option img, .game-option img {
-            max-width: 100%;
-            height: auto;
-        }
-        .steps {
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
-        button {
-            background-color: #ff6600;
+        .recharge-form button, .deposit-form button {
+            padding: 10px;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
         }
-        button:hover {
-            background-color: #ff8533;
+        .recharge-form button:disabled, .deposit-form button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
         }
-        .centered {
-            text-align: center;
-        }
-        .news-item {
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-        .news-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        form input, form textarea {
-            margin-bottom: 1rem;
-            padding: 0.5rem;
-        }
-        .profile-section {
-            display: flex;
-            align-items: center;
-        }
-        .profile-image {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        .balance {
-            background-color: #fff;
-            color: #ff6600;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-weight: bold;
-        }
-        .profile-menu {
-            position: absolute;
-            top: 60px;
-            left: 10px;
+        .how-to {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
             background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .how-to ol {
+            padding-left: 20px;
+        }
+        .how-to li {
+            margin-bottom: 10px;
+        }
+        .deposit-info {
+            background-color: #f9f9f9;
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 10px;
-            display: none;
-            z-index: 1000;
+            margin-bottom: 10px;
         }
-        .profile-menu a {
-            display: block;
-            padding: 5px 0;
-            color: #333;
-            text-decoration: none;
-        }
-        .profile-menu a:hover {
-            color: #ff6600;
-        }
-        #profile-section {
-            text-align: center;
-        }
-        #profile-section img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
-        .menu-toggle {
-            display: none;
-            cursor: pointer;
-            font-size: 24px;
-        }
-        .menu-close {
-            display: none;
+        .deposit-warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
         }
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 60px;
-                right: 0;
-                background-color: #ff6600;
-                width: 200px;
+            .games-container, .rewards-container {
                 flex-direction: column;
-                padding: 20px;
-                border-radius: 0 0 0 10px;
+                align-items: center;
             }
-            nav ul.show {
-                display: flex;
+            .game-card, .reward-card {
+                width: 80%;
+                max-width: 300px;
             }
-            nav ul li {
-                margin: 10px 0;
+            .top-menu {
+                flex-direction: column;
+                gap: 10px;
             }
-            .diamond-option, .deposit-option, .game-option {
-                width: calc(50% - 2rem);
+            .menu-counters {
+                order: -1;
             }
-            h1 {
-                display: none;
-            }
-            .menu-close {
-                display: block;
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                font-size: 24px;
-                cursor: pointer;
-            }
-        }
-        @media (max-width: 480px) {
-            .diamond-option, .deposit-option, .game-option {
-                width: 100%;
-            }
-        }
-        /* Nuevo estilo para el loader */
-        .loader {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #ff6600;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-            display: none;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        /* Nuevos estilos para los juegos */
-        .game-options {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin-bottom: 2rem;
-        }
-        .game-option {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 1rem;
-            margin: 1rem;
-            text-align: center;
-            width: calc(33.33% - 2rem);
-            box-sizing: border-box;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .game-option:hover {
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            transform: translateY(-5px);
-        }
-        .game-option img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 1rem;
-        }
-        .game-option h3 {
-            margin: 0;
-        }
-        /* Nuevo estilo para juegos no disponibles */
-        .game-option.not-available {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .game-option.not-available::after {
-            content: 'No disponible';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(255, 0, 0, 0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        /* Nuevos estilos para el formulario de registro */
-        .switch-form {
-            text-align: center;
-            margin-top: 1rem;
-        }
-        .switch-form a {
-            color: #ff6600;
-            text-decoration: none;
-        }
-        .switch-form a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div id="login-section">
+    <div id="login-container" class="container">
+        <h1>INICIAR SESIÓN</h1>
         <form id="login-form">
-            <h2>INICIAR SESIÓN</h2>
-            <input type="text" id="username" placeholder="Usuario" required>
-            <input type="password" id="password" placeholder="Contraseña" required>
-            <button type="submit">Entrar</button>
-            <div class="switch-form">
-                <a href="#" onclick="showRegisterForm()">¿No tienes cuenta? Regístrate aquí</a>
-            </div>
+            <input type="email" id="login-email" placeholder="Correo electrónico" required>
+            <input type="password" id="login-password" placeholder="Contraseña" required>
+            <button type="submit">INICIAR</button>
         </form>
+        <p id="login-error" class="error"></p>
+        <div class="switch">
+            <p>¿No tienes una cuenta? <a href="#" id="show-register">Regístrate</a></p>
+        </div>
+    </div>
 
-        <form id="register-form" style="display: none;">
-            <h2>REGISTRO</h2>
-            <input type="text" id="reg-username" placeholder="Usuario" required>
-            <input type="password" id="reg-password" placeholder="Contraseña" required>
-            <input type="text" id="reg-name" placeholder="Nombre" required>
-            <input type="text" id="reg-lastname" placeholder="Apellido" required>
-            <input type="tel" id="reg-phone" placeholder="Teléfono" required>
-            <input type="email" id="reg-email" placeholder="Correo electrónico" required>
-            <button type="submit">Registrar</button>
-            <div class="switch-form">
-                <a href="#" onclick="showLoginForm()">¿Ya tienes cuenta? Inicia sesión aquí</a>
-            </div>
+    <div id="register-container" class="container" style="display: none;">
+        <h1>Registro</h1>
+        <form id="register-form">
+            <input type="text" id="register-name" placeholder="Nombre" required>
+            <input type="text" id="register-lastname" placeholder="Apellido" required>
+            <input type="date" id="register-birthdate" required>
+            <input type="tel" id="register-phone" placeholder="Teléfono" required>
+            <input type="email" id="register-email" placeholder="Correo electrónico" required>
+            <input type="password" id="register-password" placeholder="Contraseña" required>
+            <input type="password" id="register-password-confirm" placeholder="Repetir contraseña" required>
+            <button type="submit">Registrarse</button>
         </form>
-    </div>
-
-    <div id="error-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('error-modal')">&times;</span>
-            <h3>Error de inicio de sesión</h3>
-            <p id="error-message"></p>
+        <p id="register-error" class="error"></p>
+        <div class="switch">
+            <p>¿Ya tienes una cuenta? <a href="#" id="show-login">Inicia sesión</a></p>
         </div>
     </div>
 
-    <div id="success-modal" class="modal">
-        <div class="modal-content">
-            <h3>Inicio de sesión exitoso</h3>
-            <p>Has iniciado sesión correctamente.</p>
-            <button onclick="closeSuccessModal()">Aceptar</button>
-        </div>
-    </div>
-
-    <div id="register-confirmation-modal" class="modal">
-        <div class="modal-content">
-            <h3>Confirmación de registro</h3>
-            <p>Su perfil será procesado vía WhatsApp. ¿Desea continuar?</p>
-            <button onclick="sendRegistrationToWhatsApp()">Sí, enviar</button>
-            <button onclick="closeModal('register-confirmation-modal')">Cancelar</button>
-        </div>
-    </div>
-
-    <div id="content">
-        <header>
-            <div class="profile-section">
-                <img src="https://via.placeholder.com/50" alt="Perfil" class="profile-image" onclick="toggleProfileMenu()">
-                <span class="balance">Saldo: <span id="user-balance">0</span> Bs</span>
+    <div id="main-content" style="display: none;">
+        <nav class="top-menu">
+            <div class="menu-sections">
+                <span class="menu-section">BONOS</span>
+                <span class="menu-section">TORNEOS</span>
             </div>
-            <h1>TROPI - CDR</h1>
-            <nav>
-                <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-                <ul id="menu">
-                    <li><a href="#inicio" onclick="showSection('inicio')">INICIO</a></li>
-                    <li><a href="#recargar" onclick="showSection('recargar')">RECARGAR</a></li>
-                    <li><a href="#contacto" onclick="showSection('contacto')">CONTACTO</a></li>
-                    <span class="menu-close" onclick="toggleMenu()">✕</span>
-                </ul>
-            </nav>
-        </header>
+            <div class="menu-counters">
+                <span class="counter" id="balance">0Bs</span>
+                <span class="counter" id="points">0Tp</span>
+            </div>
+            <img src="https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg" alt="Perfil" class="profile-pic" id="profilePic">
+        </nav>
 
-        <div class="profile-menu" id="profile-menu">
-            <a href="#perfil" onclick="showSection('perfil')">Perfil</a>
-            <a href="#depositar" onclick="showSection('depositar')">Depositar</a>
-            <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+        <div class="profile-menu" id="profileMenu">
+            <a href="#" id="homeLink">INICIO</a>
+            <a href="#" id="profileLink">PERFIL</a>
+            <a href="#" id="depositLink">DEPOSITAR</a>
+            <a href="#" id="rewardsLink">CANJEAR</a>
+            <a href="#" id="logoutLink">Cerrar sesión</a>
         </div>
 
-        <main id="main-content">
-            <div id="loader" class="loader"></div>
-            <section id="inicio">
-                <h2 class="centered">NOVEDADES</h2>
-                <div class="news-item">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZofGOBiYtr8nglrGe0f_4dPJK63YGIT7zPNLOE98U-atxXCbrLqZsPKZWEPY9neuhLuHT8rM32SuCBTDKH1LdZca4yVuLa_OUF50SYmhzRJaH4M9c7U3TYFeYiJcFNNaycM78OA1ma6GbM1zt0kjQf0L7WVbp1VpilYlFuUsFHRMeoY1q36W2bxDj1lRF/s16000/maxresdefault.jpg" alt="Oferta especial de fin de semana">
-                    <h3>¡Nuevo Pase Booyah de Diciembre!</h3>
-                    <p>¡No te pierdas el nuevo pase booyah con skins exclusivas!</p>
-                </div>
-                <div class="news-item">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMY7krKmCGN0BuTUagWXzy_oyVU44bJLhy_0EMfogYK9orlFvBfbBegubX3Upj8F7HT_nt1iM42DpZnfkdbs8hSwRyriwuLLoiA8u_ZWfgtna-qID7q5Dz7m49ALJm9nwc11T7cd7OTC83X2hK-Y021ebMR2fFFhrHusWkvdDfCfqbSMi4cSSg8wD4JEY-/s1600/469037665_1109113277439343_5991671094149113617_n.jpg" alt="Evento de doble experiencia">
-                    <h3>Nueva agenda semanal</h3>
-                    <p>Este fin de semana, gana premios con el evento de recarga</p>
-                </div>
-                <div class="news-item">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizmj2LgCqrALa2WQxv-mH8qc1m6rVNK-OvbEslDpNrQWBfoEPctSAzDJT4JPMo2mhaMevbKvngJZemvSS3kQRWV0WZt4STJ2X21wYarzW73xipJYbkr70GJvjYf7_-ebCcpso19UjDg-au3dgJCFdb8Bg6-KYpHo33-fYsS8Ot23MKg30BxVe2B4966LH9/s16000/mantenimiento-web.jpg" alt="Evento de doble experiencia">
-                    <h3>Mantenimiento Programado</h3>
-                    <p>El servidor estará en mantenimiento el próximo miercoles de 6am a 3pm</p>
-                </div>
-            </section>
+        <div class="games-container">
+            <div class="game-card" data-game="Free Fire">
+                <img src="https://play-lh.googleusercontent.com/l8TumJ2vNO4Z_e7CinIaAZgCPC3iOUrVUIzwRHjTFPLxFjnBIyVShdcEMyZh8tX0xNY=w240-h480-rw" alt="Free Fire">
+                <h3>FREE FIRE</h3>
+                <p>Recarga ahora</p>
+            </div>
+            <div class="game-card unavailable" data-game="Mobile Legends">
+                <img src="https://play-lh.googleusercontent.com/F9cgJKcHDpODaCSGVMYjQMuCp3Bh8ithjTmfotUTRqXe_7jMZM81lrlxo6RAz9vroK8" alt="Mobile Legends">
+                <h3>Mobile LEGENDS</h3>
+                <p>No Disponible</p>
+            </div>
+            <div class="game-card unavailable" data-game="Blood Strike">
+                <img src="https://play-lh.googleusercontent.com/fq1POW6s1p5E9XkvwjcO5fJK3TF0EZouw8XQD80d1qOLS3g7DHtPIuVPtsx91MpY8xs=w240-h480-rw" alt="Blood Strike">
+                <h3>BLOOD STRIKE</h3>
+                <p>No Disponible</p>
+            </div>
+            <div class="game-card unavailable" data-game="PUBG Mobile">
+                <img src="https://play-lh.googleusercontent.com/KX9yhQoqjBNe2RBOJPixAlroYrUcGcQtSz014wQt79gWN1SwYeHwEgULCDbGoAZ_NEQ" alt="PUBG Mobile">
+                <h3>PUBG MOBILE</h3>
+                <p>No Disponible</p>
+            </div>
+        </div>
 
-            <section id="recargar" style="display: none;">
-                <h2 class="centered">Selecciona el juego para recargar</h2>
-                <div class="game-options">
-                    <div class="game-option" onclick="showGameOptions('free-fire')">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEggUsHge6Bxo56JMLz9yX0kPIiUH-UqnOMcyrKuiHs8iufv12NoO-uvygZoK6nKeT0J9QZVi1WwHchoImpb-ydOdKLX1B7aW__2Hx2Cx1A0IdV2DlMSNo7Jz1MDYZjGHGI8peA52zKDm4l5bErL74m48okrowgiNGGvUpeaGzLwxX4RJ59iIHx2yn_D6SMx/s16000/360.jpg" alt="Free Fire">
-                        <h3>Free Fire</h3>
-                    </div>
-                    <div class="game-option" onclick="showGameOptions('blood-strike')">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjRxoBg0ko3KA9-hDzNjk520mgOrltHI7HPXc5LBk4VC25fY_llVcHlmMdGQ2o7TnUuAm9LgaEqVtVZWPU8mVDqVbMtPg8dsTCnfg0xCy1io28SdjfVsYtdsNkHYifKcS7G5hhUmssZYdhdnlLA70nGwPUtU8ybHNRIBLZ61WkuZ2sWpoBlDeRkQmFklyvR/s16000/blood-strike.jpg" alt="Blood Strike">
-                        <h3>Blood Strike</h3>
-                    </div>
-                    <div class="game-option not-available">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh3mSXVyUdKeG5aKQsyXi5OKfIAIrTAvnEMiSuzh1Gx5VhSgwGvb0jDDtk1zbM-KJFkzDNlLjQwvQV7U897RlWifVMWF0u3mGF7DNt02z2LpVwJLMbL9WD_74c4_AXscoyn7NHUzJeYutkrPKQ-QPFCqyTI0c5Pa8QDnBH5_TLmvYONab_mDHJn-_agaDL-/s16000/mobile-legends-bang-bang_c6z8.jpg" alt="Mobile Legends">
-                        <h3>Mobile Legends</h3>
-                    </div>
-                    <div class="game-option not-available">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFxUQLK2lhvPtAWnEB0Q1KM2kzN92ERkGKGW71CI0E_hKmp9ASrEfGCUSfCapdg9UGqZ1yv7kYzJt5HQFLa0jRR_gnm1lK3NldLsu74AD_iChYskjBCLqvLgqCIspOv03H25GgNBxmsdX279IehHulKtnVfJNtfQvZiBZkHbXzPISBD5fm-f3AigUw6TGm/s16000/unnamed.jpg" alt="Call of Duty">
-                        <h3>Call of Duty</h3>
-                    </div>
-                    <div class="game-option" onclick="showGameOptions('pubg-mobile')">
-                        <img src="https://play-lh.googleusercontent.com/JRd05pyBH41qjgsJuWduRJpDeZG0Hnb0yjf2nWqO7VaGKL10-G5UIygxED-WNOc3pg" alt="PUBG Mobile">
-                        <h3>PUBG Mobile</h3>
-                    </div>
-                    <div class="game-option not-available">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEho3d_AManXNTcfv_tON_NFFsnMEcuW1i21LwghpyTyaOyl4C628xrydxkPP0m0DU34rlGHvbeXK0SWeMbspmt_9QQKqWwfuvR_4UG7A-SXxjs7zvP-llYwzOgthyphenhyphen224dzcqS2-2O0qdBU2DEkfLBVHd-2Y8z5LvwqhxiYOOjL6jz1VmLigxgA9z15iGnKS/s16000/latest.jpg" alt="Stumble Guys">
-                        <h3>Stumble Guys</h3>
-                    </div>
-                </div>
-
-                <div id="free-fire-options" style="display: none;">
-                    <h2 class="centered">Recarga tus Diamantes en Free Fire</h2>
-                    <div class="diamond-options">
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0EdQaiAqAM9_mG-CUJIydWOyVl62PjPUSxbcndfGf5n21I3Xo9Sivm8-C_zx6bCQh2lOmsjVZB08kMXLhosZWk_RoyHbEG7o4z499EUxP4h6ByP25BZTDQr5D4u6RMv5gnijFzutOgoFZuROTiqwuwplL3Oa967S62PzXrlXbjMIa7RMxvxj3nnIIjF2T/s16000/yVS1saI.png" alt="110 Diamantes">
-                            <h3>110 Diamantes</h3>
-                            <p>70Bs</p>
-                            <button onclick="seleccionarRecarga('Free Fire', '110 Diamantes', 70)">Seleccionar</button>
-                        </div>
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0EdQaiAqAM9_mG-CUJIydWOyVl62PjPUSxbcndfGf5n21I3Xo9Sivm8-C_zx6bCQh2lOmsjVZB08kMXLhosZWk_RoyHbEG7o4z499EUxP4h6ByP25BZTDQr5D4u6RMv5gnijFzutOgoFZuROTiqwuwplL3Oa967S62PzXrlXbjMIa7RMxvxj3nnIIjF2T/s16000/yVS1saI.png" alt="341 Diamantes">
-                            <h3>341 Diamantes</h3>
-                            <p>210Bs</p>
-                            <button onclick="seleccionarRecarga('Free Fire', '341 Diamantes', 210)">Seleccionar</button>
-                        </div>
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0EdQaiAqAM9_mG-CUJIydWOyVl62PjPUSxbcndfGf5n21I3Xo9Sivm8-C_zx6bCQh2lOmsjVZB08kMXLhosZWk_RoyHbEG7o4z499EUxP4h6ByP25BZTDQr5D4u6RMv5gnijFzutOgoFZuROTiqwuwplL3Oa967S62PzXrlXbjMIa7RMxvxj3nnIIjF2T/s16000/yVS1saI.png" alt="572 Diamantes">
-                            <h3>572 Diamantes</h3>
-                            <p>360Bs</p>
-                            <button onclick="seleccionarRecarga('Free Fire', '572 Diamantes', 360)">Seleccionar</button>
-                        </div>
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMmYk4W7Tmq8ANDzjwG5DrECrkpBsUV3SiKwex4NarLU4KrHAGLiHQ0dbUilN0wxPqGwI9kkPYhIWU_gIWIYJ54azKV8tv7d9jah0v1UlVLW6EKk9Ke_X_WI1Lc6vj53QWUgeBHMttpTMSej7hRaoxUHcQDOJQGvcZ6KKOmWmdTOA3bFfh5SrDmUIlRUCU/s1600/Tarjeta-semanal.jpg" alt="Tarjeta Semanal">
-                            <h3>Tarjeta Semanal</h3>
-                            <p>140Bs</p>
-                            <button onclick="seleccionarRecarga('Free Fire', 'Tarjeta Semanal', 140)">Seleccionar</button>
-                        </div>
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjshX2vujxOnfJXNxw7HsRP9s7g0BJJDRS9Ti9b8OVUu1eCqaqVs3goIOr_T6S3JZDFpbFnMIA50e9gr2yGdyBaq9iw2J6IrdMuVRzhqvlClu82kg7RwU9QMqnLHkhjyY0jlIgQ_zkRFg8tWJ_NP7N5Q9q3CNDIKkPjWrsVTHmMCTG4Sfe-5rNDl6JTewes/s1600/Tarjeta-mensual.jpg" alt="Tarjeta Mensual">
-                            <h3>Tarjeta Mensual</h3>
-                            <p>590Bs</p>
-                            <button onclick="seleccionarRecarga('Free Fire', 'Tarjeta Mensual', 590)">Seleccionar</button>
-                        </div>
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDThIBjj4aLTY8dIFPp9tActhRY5mybr3yE-LiyKCnJS5m_jO-jDMLA3nvzob0TI-xN4ZA964jrk6fq_O_318KNbQ1O8-gk3R-cbmfdQim1hY0H0JSZuIH1PoyV0vc-NJ4nj4ufIDgZKQIjTW42prT2ibwzRHoB_eW0vhOlrX7iS0bMh9myXFAznT3NHaH/s1600/Icono-ezgif.com-png-to-webp-conv.jpg" alt="Pase Booyah!">
-                            <h3>Pase Booyah!</h3>
-                            <p>180Bs</p>
-                            <button onclick="seleccionarRecarga('Free Fire', 'Pase Booyah!', 180)">Seleccionar</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="blood-strike-options" style="display: none;">
-                    <h2 class="centered">Recarga en Blood Strike</h2>
-                    <div class="diamond-options">
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhs_whoBhPxjWIcmmOCRcuAHse8i12q7r2Hgyq4v1J150ZYcWu-Ot0TX0Rxio8JbeL59SI0WBvFWtZ4kXS9jAluAMc4Y4E1lwLVn6vIcnCYmNbBscEcezwAutPdvN5tYJwZ0g4JheKm9jcFDz514yHv5OI-TuIcKJslA11mC5rajoRost6TOo6Hi1Q0g2k1/s16000/oss-4aa616b4932638332eb91b4bd108.jpg" alt="">
-                            <h3>116 Oro</h3>
-                            <p>70Bs</p>
-                            <button onclick="seleccionarRecarga('Blood Strike', '100 Monedas', 70)">Seleccionar</button>
-                        </div>
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhs_whoBhPxjWIcmmOCRcuAHse8i12q7r2Hgyq4v1J150ZYcWu-Ot0TX0Rxio8JbeL59SI0WBvFWtZ4kXS9jAluAMc4Y4E1lwLVn6vIcnCYmNbBscEcezwAutPdvN5tYJwZ0g4JheKm9jcFDz514yHv5OI-TuIcKJslA11mC5rajoRost6TOo6Hi1Q0g2k1/s16000/oss-4aa616b4932638332eb91b4bd108.jpg" alt="">
-                            <h3>352 Oro</h3>
-                            <p>200Bs</p>
-                            <button onclick="seleccionarRecarga('Blood Strike', '300 Monedas', 200)">Seleccionar</button>
-                        </div>
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhs_whoBhPxjWIcmmOCRcuAHse8i12q7r2Hgyq4v1J150ZYcWu-Ot0TX0Rxio8JbeL59SI0WBvFWtZ4kXS9jAluAMc4Y4E1lwLVn6vIcnCYmNbBscEcezwAutPdvN5tYJwZ0g4JheKm9jcFDz514yHv5OI-TuIcKJslA11mC5rajoRost6TOo6Hi1Q0g2k1/s16000/oss-4aa616b4932638332eb91b4bd108.jpg" alt="">
-                            <h3>594 Oro</h3>
-                            <p>340s</p>
-                            <button onclick="seleccionarRecarga('Blood Strike', '500 Monedas', 340)">Seleccionar</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="mobile-legends-options" style="display: none;">
-                    <h2 class="centered">Recarga en Mobile Legends</h2>
-                    <p style="text-align: center; color: red;">Lo sentimos, las recargas para Mobile Legends no están disponibles en este momento.</p>
-                </div>
-
-                <div id="call-of-duty-options" style="display: none;">
-                    <h2 class="centered">Recarga en Call of Duty Mobile</h2>
-                    <p style="text-align: center; color: red;">Lo sentimos, las recargas para Call of Duty Mobile no están disponibles en este momento.</p>
-                </div>
-
-                <div id="pubg-mobile-options" style="display: none;">
-                    <h2 class="centered">Recarga en PUBG Mobile</h2>
-                    <div class="diamond-options">
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLzyMh1Ii6jYfHRTfUhuCrZsuHsJLmfVkA7rPJb85fwVMZPkvQNn3P227oEc6R_XvMZHggD__BAOERGOkhjqW_cXFEmww-6BRDyfYgQ5w6YB0lHfFr9zyio0H9JdIUOzeKgOWLcKaPlbsjT3KuOTfPHoNkgsfOLonDjIQCSxC-Kw-WINMt4rOFrTagTcBF/s16000/IMG_3394-Photoroom-2.jpg" alt="">
-                            <h3>60 UC</h3>
-                            <p>75Bs</p>
-                            <button onclick="seleccionarRecarga('PUBG Mobile', '60 UC', 75)">Seleccionar</button>
-                        </div>
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLzyMh1Ii6jYfHRTfUhuCrZsuHsJLmfVkA7rPJb85fwVMZPkvQNn3P227oEc6R_XvMZHggD__BAOERGOkhjqW_cXFEmww-6BRDyfYgQ5w6YB0lHfFr9zyio0H9JdIUOzeKgOWLcKaPlbsjT3KuOTfPHoNkgsfOLonDjIQCSxC-Kw-WINMt4rOFrTagTcBF/s16000/IMG_3394-Photoroom-2.jpg" alt="">
-                            <h3>325 UC</h3>
-                            <p>366Bs</p>
-                            <button onclick="seleccionarRecarga('PUBG Mobile', '300 UC', 366)">Seleccionar</button>
-                        </div>
-                        <div class="diamond-option">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLzyMh1Ii6jYfHRTfUhuCrZsuHsJLmfVkA7rPJb85fwVMZPkvQNn3P227oEc6R_XvMZHggD__BAOERGOkhjqW_cXFEmww-6BRDyfYgQ5w6YB0lHfFr9zyio0H9JdIUOzeKgOWLcKaPlbsjT3KuOTfPHoNkgsfOLonDjIQCSxC-Kw-WINMt4rOFrTagTcBF/s16000/IMG_3394-Photoroom-2.jpg" alt="">
-                            <h3>660 UC</h3>
-                            <p>723Bs</p>
-                            <button onclick="seleccionarRecarga('PUBG Mobile', '600 UC', 723)">Seleccionar</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="stumble-guys-options" style="display: none;">
-                    <h2 class="centered">Recarga en Stumble Guys</h2>
-                    <p style="text-align: center; color: red;">Lo sentimos, las recargas para Stumble Guys no están disponibles en este momento.</p>
-                </div>
-
-                <section class="steps">
-                    <h2>Cómo recargar</h2>
-                    <ol>
-                        <li>Selecciona el juego que deseas recargar</li>
-                        <li>Elige la cantidad de moneda virtual que quieres recargar</li>
-                        <li>Haz clic en "Seleccionar" para la opción deseada</li>
-                        <li>Se descontara de su saldo disponible</li>
-                        <li>Envia tu ID del juego a recargar</li>
-                        <li>¡Recibe tu recarga en el juego de 10min - 60min!</li>
-                    </ol>
-                </section>
-            </section>
-
-            <section id="contacto" style="display: none;">
-                <h2 class="centered">Contacto</h2>
-                <form onsubmit="return enviarFormulario(event)">
-                    <input type="text" name="nombre" placeholder="Nombre" required>
-                    <input type="text" name="apellido" placeholder="Apellido" required>
-                    <input type="email" name="email" placeholder="Correo electrónico" required>
-                    <input type="text" name="id" placeholder="ID de Juego" required>
-                    <textarea name="mensaje" placeholder="Asunto del mensaje" required></textarea>
-                    <button type="submit">Enviar</button>
+        <div class="recharge-modal" id="rechargeModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Recargar Free Fire</h2>
+                <form class="recharge-form" id="rechargeForm">
+                    <img id="gameImage" src="https://play-lh.googleusercontent.com/l8TumJ2vNO4Z_e7CinIaAZgCPC3iOUrVUIzwRHjTFPLxFjnBIyVShdcEMyZh8tX0xNY=w240-h480-rw" alt="Free Fire">
+                    <select id="rechargeAmount" required>
+                        <option value="">Selecciona la cantidad</option>
+                        <option value="90">110 diamantes - 90Bs (+1 Tp)</option>
+                        <option value="250">341 diamantes - 250Bs (+3 Tp)</option>
+                        <option value="410">572 diamantes - 410Bs (+5 Tp)</option>
+                        <option value="160">Tarjeta Semanal - 160Bs</option>
+                        <option value="800">Tarjeta Mensual - 800Bs</option>
+                    </select>
+                    <input type="text" id="gameId" placeholder="ID del juego" required>
+                    <button type="submit">Recargar</button>
                 </form>
-            </section>
+            </div>
+        </div>
 
-            <section id="perfil" style="display: none;">
-                <h2 class="centered">Perfil de Usuario</h2>
-                <div id="profile-section">
-                    <img src="https://via.placeholder.com/150" alt="Foto de perfil" id="profile-section-image">
-                    <p><strong>Usuario:</strong> <span id="profile-username"></span></p>
-                    <p><strong>Nombre:</strong> <span id="profile-name"></span></p>
-                    <p><strong>Apellido:</strong> <span id="profile-lastname"></span></p>
-                    <p><strong>Teléfono:</strong> <span id="profile-phone"></span></p>
-                    <p><strong>Correo Electrónico:</strong> <span id="profile-email"></span></p>
+        <div class="deposit-modal" id="depositModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Depositar</h2>
+                <div class="deposit-info">
+                    <p><strong>Datos del Pago Móvil:</strong></p>
+                    <p>Banco: 0102 (BDV)</p>
+                    <p>Teléfono: (0412) 595-1521</p>
+                    <p>Cédula: 14.944.221</p>
                 </div>
-            </section>
-
-            <section id="depositar" style="display: none;">
-                <h2 class="centered">Depositar Saldo</h2>
-                <div class="deposit-options">
-                    <div class="deposit-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
-                        <h3>50 Bs</h3>
-                        <button onclick="seleccionarDeposito(50)">Seleccionar</button>
-                    </div>
-                    <div class="deposit-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
-                        <h3>100 Bs</h3>
-                        <button onclick="seleccionarDeposito(100)">Seleccionar</button>
-                    </div>
-                    <div class="deposit-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
-                        <h3>150 Bs</h3>
-                        <button onclick="seleccionarDeposito(150)">Seleccionar</button>
-                    </div>
-                    <div class="deposit-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
-                        <h3>200 Bs</h3>
-                        <button onclick="seleccionarDeposito(200)">Seleccionar</button>
-                    </div>
-                    <div class="deposit-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
-                        <h3>250 Bs</h3>
-                        <button onclick="seleccionarDeposito(250)">Seleccionar</button>
-                    </div>
-                    <div class="deposit-option">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHSznwqOoFbUXRFk9E_IBKpvJv3Zwy3Iiv4_yo2rjl2BsnhchHEkX6O1-9Yhk2_kE1aSBwUZ0CDjoQZt_EJT3jVQImkbUFPl9CIPffeVmx9-ZJ9uam7Iu48-o65viVLlv-8FANIgOpoIFlKIb3XBCowqyzdQl9_9mePLj_PEdwK1Nd8ZBpzwAtWdpC3NQv/s16000/Dise%C3%B1o%20sin%20t%C3%ADtulo.png" alt="">
-                        <h3>300 Bs</h3>
-                        <button onclick="seleccionarDeposito(300)">Seleccionar</button>
-                    </div>
+                <form class="deposit-form" id="depositForm">
+                    <input type="number" id="depositAmount" placeholder="Cantidad a depositar (mínimo 40Bs)" min="40" required>
+                    <input type="text" id="paymentReference" placeholder="Referencia del pago" required>
+                    <input type="date" id="paymentDate" required>
+                    <button type="submit">Depositar</button>
+                </form>
+                <div class="deposit-warning">
+                    <p><strong>Aviso:</strong></p>
+                    <p>1. Comisión del 1.5% en depósitos de otros bancos.</p>
+                    <p>2. No escribir al número del pago móvil, ni llamar.</p>
                 </div>
+            </div>
+        </div>
 
-                <section class="steps">
-                    <h2>Cómo Depositar</h2>
-                    <ol>
-                        <li>Selecciona la cantidad que deseas Depositar</li>
-                        <li>Envia el mensaje automatico de whatsapp</li>
-                        <li>Realiza el PAGO MOVIL</li>
-                        <li>Envias tu USUARIO o CORREO</li>
-                        <li>¡Recibe tu deposito de 10min - 30min!</li>
-                    </ol>
-                </section>
-            </section>
-        </main>
+        <div class="profile-modal" id="profileModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Perfil de Usuario</h2>
+                <div style="text-align: center;">
+                    <img src="https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg" alt="Foto de perfil" style="width:100px;height:100px;border-radius:50%;margin:0 auto 20px;">
+                    <p><strong>Nombre:</strong> <span id="profileName">Usuario</span></p>
+                    <p><strong>Apellido:</strong> <span id="profileLastName">Ejemplo</span></p>
+                    <p><strong>Teléfono:</strong> <span id="profilePhone">+58 123 456 7890</span></p>
+                    <p><strong>Fecha de Nacimiento:</strong> <span id="profileBirthdate">01/01/1990</span></p>
+                    <p><strong>Email:</strong> <span id="profileEmail">usuario@example.com</span></p>
+                    <p><strong>Saldo:</strong> <span id="profileBalance">0Bs</span></p>
+                    <p><strong>Puntos:</strong> <span id="profilePoints">0Tp</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="rewards-container" id="rewardsContainer" style="display: none;">
+            <h2>Canjear Recompensas</h2>
+            <div class="reward-card">
+                <img src="/placeholder.svg?height=100&width=100" alt="Reward 1">
+                <h3>110 Diamantes</h3>
+                <p>1000 puntos</p>
+            </div>
+            <div class="reward-card">
+                <img src="/placeholder.svg?height=100&width=100" alt="Reward 2">
+                <h3>Tarjeta Semanal</h3>
+                <p>1600 puntos</p>
+            </div>
+            <div class="reward-card">
+                <img src="/placeholder.svg?height=100&width=100" alt="Reward 3">
+                <h3>572 Diamantes</h3>
+                <p>4100 puntos</p>
+            </div>
+        </div>
+
+        <div class="how-to">
+            <h2>CÓMO RECARGAR</h2>
+            <ol>
+                <li>Selecciona el juego que deseas recargar.</li>
+                <li>Elije la cantidad a recargar.</li>
+                <li>Introduce tu ID de juego.</li>
+                <li>Haz clic en el botón "Recargar", llevara al WhatsApp.</li>
+                <li>Se descontara de su saldo disponible.</li>
+            </ol>
+        </div>
     </div>
 
     <script>
-        // User database (replace with your own users)
+        // Simulated user database
         const users = [
-            { username: 'Peluca', password: 'Peluca*15', name: 'Jonder', lastname: 'Lugo', phone: '+584123770260', email: 'jonderlugo15@gmail.com', balance: 50, profileImage: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqUSNe67_z0J4C93Q0w0IJ4lU1hLDje9flLMoJwtvM1_bWnO-9AeSgCc1UOrA4To2LO9bgS9-sGrbAMjhnJToEu6sZhwTsSI6ZSq04ZlMyvLNu-LdAxc5feqb3cT1DLl21n_ycGjrF-36mlsBKT16FAOQjC83pKolEf4tjBtiHUEa7RHzvdI3nsc-KNcA3/s16000/468264415_122162933420261555_5691439328432038727_n.jpg' },
-            { username: 'Nihelsito', password: '123123', name: 'Nihelsen', lastname: 'Barceló', phone: '+584261829019', email: 'nihlsenbarcelo@gmail.com', balance: 0, profileImage: 'https://via.placeholder.com/150' },
-            { username: 'Vende_patria18', password: '31478549', name: 'Larry', lastname: 'Caberga', phone: '+584129109908', email: 'karma20.2005@gmail.com', balance: 0, profileImage: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgr0Iw4kClAWjA-2IM5J4dvHYYy8IC4Z5nJ0aLV6ozTZiB2Sbdy5q-6TmQ2j4AI8v2gEZP-aQAo9YQL4BbQ9433DNFe_-SKDpzsO3YZtmkqkQ07Mr4zPPIJegqnGjyuBJtvurxh87oxOt5GBAao3rNChnM2C7vCBt8S2qtdpkm0FZEcG25SrTR_7MTVVxlS/s16000/Imagen%20de%20WhatsApp%202024-12-08%20a%20las%2015.48.11_7b8ecefb.jpg' },
-            { username: 'Cachetes', password: '34409059', name: 'Stevenson', lastname: 'Correa', phone: '+584267213285', email: 'correastevenson275@gmail.com', balance: 0, profileImage: '#' },
+            { 
+                email: 'jonderlugo15@gmail.com', 
+                password: 'Peluca*15', 
+                name: 'Jonder', 
+                lastName: 'Lugo',
+                phone: '+58 (412) 377-0260',
+                birthdate: '09/01/2007',
+                balance: 100, 
+                points: 50 
+            }
         ];
 
         let currentUser = null;
 
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            const user = users.find(u => u.username === username);
-            
-            if (!user) {
-                showErrorModal('El usuario no existe');
-            } else if (user.password !== password) {
-                showErrorModal('La contraseña es incorrecta');
-            } else {
-                currentUser = user;
-                document.getElementById('success-modal').style.display = 'block';
-            }
+        // DOM Elements
+        const loginContainer = document.getElementById('login-container');
+        const registerContainer = document.getElementById('register-container');
+        const mainContent = document.getElementById('main-content');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const showRegister = document.getElementById('show-register');
+        const showLogin = document.getElementById('show-login');
+        const loginError = document.getElementById('login-error');
+        const registerError = document.getElementById('register-error');
+        const profilePic = document.getElementById('profilePic');
+        const profileMenu = document.getElementById('profileMenu');
+        const rechargeModal = document.getElementById('rechargeModal');
+        const depositModal = document.getElementById('depositModal');
+        const profileModal = document.getElementById('profileModal');
+        const rewardsContainer = document.getElementById('rewardsContainer');
+        const gameCards = document.querySelectorAll('.game-card');
+        const rechargeForm = document.getElementById('rechargeForm');
+        const depositForm = document.getElementById('depositForm');
+        const balanceDisplay = document.getElementById('balance');
+        const pointsDisplay = document.getElementById('points');
+
+        // Event Listeners
+        loginForm.addEventListener('submit', handleLogin);
+        registerForm.addEventListener('submit', handleRegister);
+        showRegister.addEventListener('click', toggleForms);
+        showLogin.addEventListener('click', toggleForms);
+
+        profilePic.addEventListener('click', () => {
+            profileMenu.classList.toggle('active');
         });
 
-        function showErrorModal(message) {
-            document.getElementById('error-message').textContent = message;
-            document.getElementById('error-modal').style.display = 'block';
-        }
+        document.getElementById('homeLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            rewardsContainer.style.display = 'none';
+            document.querySelector('.games-container').style.display = 'flex';
+            document.querySelector('.how-to').style.display = 'block';
+        });
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
+        document.getElementById('profileLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            profileModal.style.display = 'block';
+            updateProfileInfo();
+        });
 
-        function closeSuccessModal() {
-            closeModal('success-modal');
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
-            updateUserInfo();
-            showSection('inicio');
-        }
+        document.getElementById('depositLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            depositModal.style.display = 'block';
+        });
 
-        function showSection(sectionId) {
-            const loader = document.getElementById('loader');
-            loader.style.display = 'block';
-            
-            setTimeout(() => {
-                const sections = ['inicio', 'recargar', 'contacto', 'perfil', 'depositar'];
-                sections.forEach(id => {
-                    document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
-                });
-                loader.style.display = 'none';
-                
-                // Cerrar menús después de seleccionar una opción
-                toggleMenu(true);
-                toggleProfileMenu(true);
-            }, 500);
-        }
+        document.getElementById('rewardsLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            rewardsContainer.style.display = 'flex';
+            document.querySelector('.games-container').style.display = 'none';
+            document.querySelector('.how-to').style.display = 'none';
+        });
 
-        function showGameOptions(gameId) {
-            const gameOptions = ['free-fire-options', 'blood-strike-options', 'mobile-legends-options', 'call-of-duty-options', 'pubg-mobile-options', 'stumble-guys-options'];
-            gameOptions.forEach(option => {
-                document.getElementById(option).style.display = 'none';
+        document.getElementById('logoutLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            logout();
+        });
+
+        gameCards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (!card.classList.contains('unavailable')) {
+                    rechargeModal.style.display = 'block';
+                }
             });
-            document.getElementById(`${gameId}-options`).style.display = 'block';
-            showSection('recargar');
-        }
-
-        function seleccionarRecarga(juego, cantidad, precio) {
-            const mensaje = encodeURIComponent(`Hola, deseo recargar ${cantidad} en ${juego} por ${precio}Bs`);
-            const whatsappURL = `https://wa.me/584243734495?text=${mensaje}`;
-            window.open(whatsappURL, '_blank');
-        }
-
-        function enviarFormulario(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData);
-            const mailtoLink = `mailto:Tropisoporte2024@gmail.com?subject=Contacto de ${data.nombre} ${data.apellido}&body=Nombre: ${data.nombre} ${data.apellido}%0D%0AEmail: ${data.email}%0D%0AID de Juego: ${data.id}%0D%0AMensaje: ${data.mensaje}`;
-            window.location.href = mailtoLink;
-        }
-
-        function toggleProfileMenu(forceClose = false) {
-            const menu = document.getElementById('profile-menu');
-            if (forceClose) {
-                menu.style.display = 'none';
-            } else {
-                menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-            }
-        }
-
-        function updateUserInfo() {
-            if (currentUser) {
-                document.getElementById('user-balance').textContent = currentUser.balance;
-                document.getElementById('profile-username').textContent = currentUser.username;
-                document.getElementById('profile-name').textContent = currentUser.name;
-                document.getElementById('profile-lastname').textContent = currentUser.lastname;
-                document.getElementById('profile-phone').textContent = currentUser.phone;
-                document.getElementById('profile-email').textContent = currentUser.email;
-                document.querySelector('.profile-image').src = currentUser.profileImage;
-                document.getElementById('profile-section-image').src = currentUser.profileImage;
-            }
-        }
-
-        function seleccionarDeposito(cantidad) {
-            const mensaje = encodeURIComponent(`Hola deseo depositar ${cantidad} Bs pago movil porfavor @${currentUser.username}`);
-            const whatsappURL = `https://wa.me/584243734495?text=${mensaje}`;
-            window.open(whatsappURL, '_blank');
-        }
-
-        function cerrarSesion() {
-            currentUser = null;
-            document.getElementById('content').style.display = 'none';
-            document.getElementById('login-section').style.display = 'flex';
-            document.getElementById('login-form').reset();
-        }
-
-        function toggleMenu(forceClose = false) {
-            const menu = document.getElementById('menu');
-            if (forceClose) {
-                menu.classList.remove('show');
-            } else {
-                menu.classList.toggle('show');
-            }
-        }
-
-        // Prevent access to content if not logged in
-        if (document.getElementById('login-section').style.display !== 'none') {
-            document.getElementById('content').style.display = 'none';
-        }
-
-        // Mostrar la sección de inicio por defecto después del login
-        showSection('inicio');
-
-        function showRegisterForm() {
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('register-form').style.display = 'block';
-        }
-
-        function showLoginForm() {
-            document.getElementById('login-form').style.display = 'block';
-            document.getElementById('register-form').style.display = 'none';
-        }
-
-        document.getElementById('register-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('register-confirmation-modal').style.display = 'block';
         });
 
-        function sendRegistrationToWhatsApp() {
-            const username = document.getElementById('reg-username').value;
-            const password = document.getElementById('reg-password').value;
-            const name = document.getElementById('reg-name').value;
-            const lastname = document.getElementById('reg-lastname').value;
-            const phone = document.getElementById('reg-phone').value;
-            const email = document.getElementById('reg-email').value;
+        rechargeForm.addEventListener('submit', handleRecharge);
+        depositForm.addEventListener('submit', handleDeposit);
 
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', () => {
+                rechargeModal.style.display = 'none';
+                depositModal.style.display = 'none';
+                profileModal.style.display = 'none';
+            });
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == rechargeModal) {
+                rechargeModal.style.display = 'none';
+            }
+            if (event.target == depositModal) {
+                depositModal.style.display = 'none';
+            }
+            if (event.target == profileModal) {
+                profileModal.style.display = 'none';
+            }
+        });
+
+        // Functions
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const user = users.find(u => u.email === email);
+            if (user && user.password === password) {
+                currentUser = user;
+                loginError.textContent = '';
+                showMainContent();
+            } else if (!user) {
+                loginError.textContent = 'El correo no existe';
+            } else {
+                loginError.textContent = 'Contraseña incorrecta';
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const lastname = document.getElementById('register-lastname').value;
+            const birthdate = document.getElementById('register-birthdate').value;
+            const phone = document.getElementById('register-phone').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const passwordConfirm = document.getElementById('register-password-confirm').value;
+
+            if (password !== passwordConfirm) {
+                registerError.textContent = 'Las contraseñas no coinciden';
+                return;
+            }
+
+            // Send registration data to WhatsApp
             const message = `Nuevo registro:
-Usuario: ${username}
-Contraseña: ${password}
-Nombre: ${name}
-Apellido: ${lastname}
+Nombre: ${name} ${lastname}
+Fecha de nacimiento: ${birthdate}
 Teléfono: ${phone}
 Email: ${email}`;
+            sendWhatsAppMessage(message);
 
-            const whatsappURL = `https://wa.me/584243734495?text=${encodeURIComponent(message)}`;
-            
-            window.open(whatsappURL, '_blank');
-
-            closeModal('register-confirmation-modal');
-            showLoginForm();
+            registerError.textContent = 'Registro enviado. Continuaremos vía WhatsApp.';
         }
-    </script>
-    <script>
-        // Deshabilitar la inspección de la página
-        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        function toggleForms() {
+            loginContainer.style.display = loginContainer.style.display === 'none' ? 'block' : 'none';
+            registerContainer.style.display = registerContainer.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function showMainContent() {
+            loginContainer.style.display = 'none';
+            registerContainer.style.display = 'none';
+            mainContent.style.display = 'block';
+            updateBalanceAndPoints();
+        }
+
+        function handleRecharge(e) {
+            e.preventDefault();
+            const amount = parseInt(document.getElementById('rechargeAmount').value);
+            const gameId = document.getElementById('gameId').value;
+            const message = `Nueva solicitud de recarga:
+Juego: Free Fire
+ID del juego: ${gameId}
+Monto: ${amount}Bs
+Usuario: ${currentUser.name} (${currentUser.email})
+Saldo actual: ${currentUser.balance}Bs`;
+            sendWhatsAppMessage(message);
+            alert('Solicitud de recarga enviada. Espere la confirmación.');
+            rechargeModal.style.display = 'none';
+        }
+
+        function handleDeposit(e) {
+            e.preventDefault();
+            const amount = parseInt(document.getElementById('depositAmount').value);
+            if (amount < 40) {
+                alert('El monto mínimo de depósito es 40Bs.');
+                return;
+            }
+            currentUser.balance += amount;
+            updateBalanceAndPoints();
+            alert('Depósito exitoso');
+            depositModal.style.display = 'none';
+        }
+
+        function updateBalanceAndPoints() {
+            balanceDisplay.textContent = ` ${currentUser.balance} Bs`;
+            pointsDisplay.textContent = ` ${currentUser.points} Tp`;
+        }
+
+        function updateProfileInfo() {
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileLastName').textContent = currentUser.lastName || 'No especificado';
+            document.getElementById('profilePhone').textContent = currentUser.phone || 'No especificado';
+            document.getElementById('profileBirthdate').textContent = currentUser.birthdate || 'No especificado';
+            document.getElementById('profileEmail').textContent = currentUser.email;
+            document.getElementById('profileBalance').textContent = `${currentUser.balance}Bs`;
+            document.getElementById('profilePoints').textContent = currentUser.points;
+        }
+
+        function logout() {
+            currentUser = null;
+            mainContent.style.display = 'none';
+            loginContainer.style.display = 'block';
+            document.getElementById('login-email').value = '';
+            document.getElementById('login-password').value = '';
+        }
+
+        function sendWhatsAppMessage(message) {
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/584123770260?text=${encodedMessage}`, '_blank');
+        }
+
+        // Simular canje de recompensas
+        document.querySelectorAll('.reward-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const rewardName = card.querySelector('h3').textContent;
+                const requiredPoints = parseInt(card.querySelector('p').textContent);
+                if (currentUser.points >= requiredPoints) {
+                    const message = `Nueva solicitud de canje:
+Recompensa: ${rewardName}
+Puntos requeridos: ${requiredPoints}
+Usuario: ${currentUser.name} (${currentUser.email})
+Puntos actuales: ${currentUser.points}`;
+                    sendWhatsAppMessage(message);
+                    alert('Solicitud de canje enviada. Espere la confirmación.');
+                } else {
+                    alert('No tienes suficientes puntos para canjear esta recompensa');
+                }
+            });
+        });
+
+        // Agregar botón de WhatsApp
+        const whatsappButton = document.createElement('button');
+        whatsappButton.textContent = 'Contactar Soporte';
+        whatsappButton.style.position = 'fixed';
+        whatsappButton.style.bottom = '20px';
+        whatsappButton.style.right = '20px';
+        whatsappButton.style.padding = '10px 20px';
+        whatsappButton.style.backgroundColor = '#25D366';
+        whatsappButton.style.color = 'white';
+        whatsappButton.style.border = 'none';
+        whatsappButton.style.borderRadius = '5px';
+        whatsappButton.style.cursor = 'pointer';
+        whatsappButton.addEventListener('click', () => sendWhatsAppMessage('Necesito ayuda con la recarga de juegos'));
+        document.body.appendChild(whatsappButton);
+
+        // Prevent viewing source code
         document.onkeydown = function(e) {
-            if(event.keyCode == 123) {
+            if (e.ctrlKey && 
+                (e.keyCode === 67 || 
+                 e.keyCode === 86 || 
+                 e.keyCode === 85 || 
+                 e.keyCode === 117)) {
                 return false;
+            } else {
+                return true;
             }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-                return false;
-            }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-                return false;
-            }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-                return false;
-            }
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-                return false;
-            }
-        }
+        };
+        
+        document.addEventListener('contextmenu', event => event.preventDefault());
     </script>
 </body>
 </html>
+
